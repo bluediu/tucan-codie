@@ -17,7 +17,6 @@
 <a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
   <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
@@ -25,6 +24,50 @@
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+## Getting started
+
+1. Clone the repository
+2. Start and initialize database engine
+3. Generate `.env.template` and rename the file to `.env`
+
+```bash
+$ docker compose up -d
+```
+
+3. Generate Prima clint:
+
+```bash
+$ npx prisma generate
+```
+
+### 🚀 Getting Started
+
+1. **Clone the repository**
+2. **Start and initialize the database engine**
+
+```bash
+docker compose up -d
+```
+
+3. **Generate the environment file**
+   Create a copy of the template and rename it:
+
+```bash
+cp .env.template .env
+```
+
+4. **Generate Prisma client**
+
+```bash
+npx prisma generate
+```
+
+5. **Install project dependencies**
+
+```bash
+yarn install
+```
 
 ## Project setup
 
@@ -56,17 +99,6 @@ $ yarn run test:e2e
 
 # test coverage
 $ yarn run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ yarn install -g mau
-$ mau deploy
 ```
 
 With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
