@@ -8,7 +8,11 @@ import { PrismaClient } from '@prisma/client';
 import { PrinterService } from 'src/printer/printer.service';
 
 /* Helpers */
-import { getEmploymentLetterReport, getHelloWorldReport } from 'src/reports';
+import {
+  getEmploymentLetterByIdReport,
+  getEmploymentLetterReport,
+  getHelloWorldReport,
+} from 'src/reports';
 
 @Injectable()
 export class BasicReportsService extends PrismaClient implements OnModuleInit {
@@ -47,7 +51,16 @@ export class BasicReportsService extends PrismaClient implements OnModuleInit {
       throw new NotFoundException(`Employee with id ${employeeId} not found`);
     }
 
-    const docDefinition = getEmploymentLetterReport();
+    const docDefinition = getEmploymentLetterByIdReport({
+      employerName: 'Josue',
+      employerPosition: 'Gerente de Recursos Humanos',
+      employerCompany: 'Tucan Code Corp.',
+      employeeName: employee.name,
+      employeePosition: employee.position,
+      employeeStartDate: employee.start_date,
+      employeeHours: employee.hours_per_day,
+      employeeWorkSchedule: employee.work_schedule,
+    });
 
     const doc = this.printerService.createPdf(docDefinition);
 
