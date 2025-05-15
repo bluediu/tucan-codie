@@ -11,6 +11,13 @@ interface IHeaderOpts {
   showDate?: boolean;
 }
 
+const currentData: Content = {
+  text: `${DateFormatter.getDDMMYYYY(new Date())}`,
+  alignment: 'right',
+  margin: [20, 30],
+  width: 150,
+};
+
 const logo: Content = {
   image: 'src/assets/tucan-code-logo.png',
   width: 100,
@@ -23,16 +30,39 @@ export const headerSection = (opts: IHeaderOpts): Content => {
   const { title, subtitle, showLogo, showDate } = opts;
 
   const headerLogo: Content = showLogo ? logo : null;
-  const headerDate: Content = showDate
+  const headerDate: Content = showDate ? currentData : null;
+
+  const headerSubtitle: Content = title
     ? {
-        text: `${DateFormatter.getDDMMYYYY(new Date())}`,
-        alignment: 'right',
-        margin: [20, 20],
+        stack: [
+          {
+            text: subtitle,
+            alignment: 'center',
+            margin: [0, 2, 0, 0],
+            style: {
+              fontSize: 16,
+              bold: true,
+            },
+          },
+        ],
       }
     : null;
 
   const headerTitle: Content = title
-    ? { text: title, style: { bold: true, alignment: 'center' } }
+    ? {
+        stack: [
+          {
+            text: title,
+            alignment: 'center',
+            margin: [0, 15, 0, 0],
+            style: {
+              fontSize: 22,
+              bold: true,
+            },
+          },
+          headerSubtitle,
+        ],
+      }
     : null;
 
   return {
