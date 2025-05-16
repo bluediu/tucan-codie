@@ -2,7 +2,7 @@
 import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 
 /* Libs */
-import { PrismaClient } from '@prisma/client';
+import { continents, PrismaClient } from '@prisma/client';
 
 /* Service */
 import { PrinterService } from 'src/printer/printer.service';
@@ -72,8 +72,23 @@ export class BasicReportsService extends PrismaClient implements OnModuleInit {
     const countries = await this.countries.findMany({
       where: { local_name: { not: null } },
     });
-    const docDefinition = getCountryReport({ countries });
 
+    const docDefinition = getCountryReport({ countries });
+    return this.printerService.createPdf(docDefinition);
+  }
+
+  async getCountriesByContinent(continent: string) {
+    const countries = await this.countries.findMany({
+      where: {
+        local_name: { not: null },
+        continent: {
+          equals: continent as continents,
+          // mode: 'insensitive',
+        },
+      },
+    });
+
+    const docDefinition = getCountryReport({ countries });
     return this.printerService.createPdf(docDefinition);
   }
 }
